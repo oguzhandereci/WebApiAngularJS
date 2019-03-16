@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="MyApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Products</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/App.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="ProductCtrl">
+    <div class="row">
+        <div class="col">
+            <input type="checkbox" class="custom-checkbox" ng-model="ekleMi"/>
+            <form class="form-horizontal" name="urunEkle" ng-show="ekleMi" ng-submit="add()">
+                <div class="form-group">
+                    
+                    <input class="form-control" type="text" placeholder="Ürün Adı" name="prdName" ng-model="yeni.ProductName" required minlength="3" />
+                </div>
+
+                <div class="form-group">
+                    
+                    <input class="form-control" type="number" placeholder="Ürün Fiyatı" name="unitPrice" ng-model="yeni.UnitPrice" required min="0.1" max="999" />
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control" id="catList" ng-model="selectedCat">
+                        <option ng-repeat="(key,item) in categories track by item.CategoryID" value="{{item.CategoryID}}">{{item.CategoryName}}</option>
+                    </select>
+                </div>
+                
+                <div class="form-group"><input class="btn btn-info" type="submit" id="submit" value="Submit" /></div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Unit Price</th>
+                    <th>Category Name</th>
+                    <th>İşlem</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key,item) in products track by item.ProductID">
+                        <td>{{key+1}}</td>
+                        <td>{{item.ProductName}}</td>
+                        <td>{{item.UnitPrice}}</td>
+                        <td>{{item.CategoryName}}</td>
+                        <td>
+                            @*<input type="submit" ng-click="update(item.ProductID)" value="Güncelle" class="btn btn-success" />
+                            <input type="submit" ng-click="delete(item.ProductID)" value="Sil" class="btn btn-danger" />*@
+                            <button class="btn btn-success" ng-click="update(item.ProductID)">Güncelle</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

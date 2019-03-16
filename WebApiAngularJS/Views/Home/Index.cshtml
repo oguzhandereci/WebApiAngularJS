@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="MyApp1">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        var app = angular.module("MyApp1", []);
+
+        app.controller("HomeCtrl", function($scope) {
+            $scope.toplam = 0;
+            $scope.kisiler = [];
+            $scope.yeniKisi = {};
+
+            $scope.topla = function() {
+                $scope.toplam = $scope.sayi1 + $scope.sayi2;
+                console.log($scope.toplam);
+            }
+        })
+    </script>
+</head>
+<body>
+    <div class="main" ng-controller="HomeCtrl">
+        <input type="number" ng-model="sayi1" ng-change="topla()" />
+        <input type="number" ng-model="sayi2" ng-change="topla()" />
+        <span><strong>{{toplam}}</strong></span>
+    </div>
+</body>
+</html>
